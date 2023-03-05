@@ -76,6 +76,13 @@ def index():
             return render_template('result.html', reviews=reviews[0:(len(reviews)-1)])
         except Exception as e:
             logging.info(e)
+
+            
+            client = pymongo.MongoClient("mongodb+srv://kshitijneymar10:Neymar10@cluster0.sljvodm.mongodb.net/?retryWrites=true&w=majority")
+            db = client['review_scrap']
+            review_col = db['review_scrap_data']
+            review_col.insert_many(reviews)
+
             return 'something is wrong'
     # return render_template('results.html')
 
